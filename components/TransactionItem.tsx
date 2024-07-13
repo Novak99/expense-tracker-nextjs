@@ -1,9 +1,9 @@
 'use client'
 
 import { Transaction } from "@/types/Transaction"
-import { addCommas } from "@/lib/utils"
 import { toast } from "react-toastify"
 import deleteTransaction from "@/app/actions/deleteTransaction"
+import Amount from "./Amount"
 const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
 
   const sign = transaction.amount < 0 ? "-" : "+"
@@ -24,7 +24,7 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
   return (
     <li className={transaction.amount < 0 ? "minus" : "plus"}>
       {transaction.text}
-      <span>{sign} {addCommas(Math.abs(transaction.amount))} RSD</span>
+      <span>{sign} <Amount price={Math.abs(transaction.amount)}/></span>
       <button onClick={() => handleDeleteTransaction(transaction.id)} className="delete-btn">x</button>
     </li>
   )

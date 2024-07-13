@@ -1,10 +1,11 @@
 import getUserBalance from "@/app/actions/getUserBalance"
-import { addCommas } from "@/lib/utils"
+import Amount from "./Amount"
+
 const Balance = async() => {
   const { balance } = await getUserBalance()
   return (<>
     <h4>Your balance</h4>
-    <h1>{addCommas(Number(balance?.toFixed(2)) ?? 0)} RSD</h1>
+    <h1><Amount price={balance}/></h1>
   </>
   )
 }

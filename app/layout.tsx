@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CurrencyProvider } from "./contexts/CurrencyContext";
 
 const roboto = Roboto({ weight: '400', subsets: ["latin"] });
 
@@ -19,16 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={roboto.className}>
-          <Header />
-          <main className="container">
-            {children}
-          </main>
-          <ToastContainer />
-        </body>
-      </html>
-    </ClerkProvider>
+    <CurrencyProvider>
+      <ClerkProvider>
+        <html lang="en">
+          <body className={roboto.className}>
+            <Header />
+            <main className="container">
+              {children}
+            </main>
+            <ToastContainer />
+          </body>
+        </html>
+      </ClerkProvider>
+    </CurrencyProvider>
   );
 }
